@@ -1,5 +1,11 @@
-# swift-functional
+# swift-functional [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
+[![Language](https://img.shields.io/badge/language-Swift-orange.svg)]()
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)]()
+
+**Last Update: 31/August/2018.**
+
+# ✍️ About
 🧠 Articles and notes about functional programming in Swift.
 
 ## 📚 List of Contents

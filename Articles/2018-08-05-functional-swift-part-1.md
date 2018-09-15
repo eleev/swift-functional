@@ -213,13 +213,13 @@ var filteredDict = dict.flatMap { $0.value.filter{ $0 > 5 }.filter { $0 % 2 == 1
 
 // Prints:
 // [9, 7, 7]
-{% endhighlight %}
+```
 
 The part where we compose the output, transformed data of dictionary as an input parameter to `filter` function call where we assembled all the values into the final array. 
 
 We could brake it down line by line in the following manner: 
 
-{% highlight swift   %}
+```swift
 let flattenOut = dict.flatMap { $0.value.filter{ $0 > 5 } }
 // [6, 7, 7, 6, 8, 9, 8]
 let filtered = flattenOut.filter { $0 % 2 == 1 }

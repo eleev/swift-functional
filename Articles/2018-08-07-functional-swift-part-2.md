@@ -136,7 +136,7 @@ The does pretty much the same except one addition: we no longer need to use the 
 
 
 ## Morphism 
-In functional programming `Morphism` is simply a transformation function. There are two types of morphism: `Endomorphism` and `Isomorphism`. `Endomorphism` is represented as a function where the input type is the same as the output. `Isomorphism` is also represented as a pair of functions (of course, it is Functional Paradigm - everything is a function 😄) that transform between 2 types of objects that is structural in nature and no data is lost:
+In functional programming `Morphism` is simply a transformation function. There are two types of morphisms: `Endomorphism` and `Isomorphism`. `Endomorphism` is represented as a function where the input type is the same as the output. `Isomorphism` is also represented as a pair of functions (of course, it is Functional Paradigm - everything is a function 😄) that transforms between two types of objects that is structural in nature and no data is lost:
 
 ```swift
 struct Endomorphism<E> {

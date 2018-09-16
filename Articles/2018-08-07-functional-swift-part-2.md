@@ -178,7 +178,7 @@ let increment = Endomorphism<Int> { $0 + 1 }
 
 // initial value 	-> 3
 // decrement 		-> 3 - 1 = 2
-// square 			-> 2 * 2 = 4
+// square 		-> 2 * 2 = 4
 // increment 		-> 4 + 1 = 5
 ```
 

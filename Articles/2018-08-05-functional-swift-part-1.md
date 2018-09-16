@@ -6,7 +6,7 @@ about imperative vs declarative programming approaches and see how to apply all 
 let's get started! 🎬
 
 ## Functional Paradigm 
-There are a number of different approaches in building software. Hopefully you already familiar with Object Oriented Paradigm and probably Protocol Oriented Paradigm. To put it simply Functional Paradigm is an another way to structure and build programs. As the name suggests, Functional Paradigm is built around functions and a couple of additional rules, such as:
+There are a number of different approaches in building software. Hopefully you'r already familiar with Object Oriented Paradigm and probably Protocol Oriented Paradigm. To put it simply Functional Paradigm is an another way to structure and build programs. As the name suggests, Functional Paradigm is built around functions and a couple of additional rules, such as:
 
 * Immutability of data 
 * Programming is done using declarations rather than statements 

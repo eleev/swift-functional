@@ -13,7 +13,7 @@ protocol Semigroup {
 }
 ```
 
-We defined an infix operator called `diamond` operator using addition precedence group. You can figure out more about precede groups and custom operators [here](https://developer.apple.com/documentation/swift/swift_standard_library/operator_declarations). The operator will serve us as a foundation since we express `Semigroup` through an operation and using protocol extension we are going to define how exactly the operator is going to work on a particular data type. In order to do that, let’s define our first extension for `Int` type:
+We defined an infix operator called `diamond` operator using addition precedence group. You can figure out more about precedence groups and custom operators [here](https://developer.apple.com/documentation/swift/swift_standard_library/operator_declarations). The operator will serve us as a foundation since we express `Semigroup` through an operation and using protocol extension we are going to define how exactly the operator is going to work on a particular data type. In order to do that, let’s define our first extension for `Int` type:
 
 ```swift
 extension Int: Semigroup {
@@ -30,7 +30,7 @@ So far looks pretty straightforward and simple. Let’s see how the operator wor
 // Outputs: 6
 ```
 
-Let’s go a bit further and define several extension for `Semigroup` for `String`, `Bool` and  `Array` types:
+Let’s go a bit further and define several extensions of `Semigroup` for `String`, `Bool` and  `Array` types:
 
 ```swift
 extension String: Semigroup {
@@ -52,7 +52,7 @@ extension Array: Semigroup {
 }
 ```
 
-`String` semigroup can be made of concatenating two strings, `Bool`semigroup is created using  logical `and` operator and`Array` or array of elements is a concatenation of two arrays. The usage of the operator is still pretty straightforward: 
+`String` semigroup can be made of concatenating two strings, `Bool`semigroup is created using  logical `and` operator and `Array` or array of elements is concatenation of two arrays. The usage of the operator is still pretty straightforward: 
 
 ```swift
 “Hello” <> “ ” <> “ World” <> “!”
@@ -65,7 +65,7 @@ true <> false
 // false
 ```
 
-So far we didn’t get much actually! However we have established one important thing, which is a general principle of composition using protocol. This leads us to a pattern, and each pattern has some purposes.  For example we can now shorten the implementation of `reduce` function using `Semigroups`. In order to do that we need to implement new extension for `Array` type. The extension will introduce new instance method for concatenating the supported types:
+So far we didn’t get much actually! However, we have established one important thing, which is a general principle of composition using protocols. That leads us to a pattern and each pattern has some purposes.  For example we can now shorten the implementation of the `reduce` function using `Semigroups`. In order to do that we need to implement new extension for `Array` type. The extension will introduce new instance method for concatenating the supported types:
 
 ```swift
 extension Array where Array.Element: Semigroup {
@@ -76,7 +76,7 @@ extension Array where Array.Element: Semigroup {
 }
 ```
 
-With this extension `Semigroup` extensions start to bring some swifty tools. Let’s take a look how this helps us: 
+With this extension `Semigroup` protocol conformances start to bring some Swifty tools. Let’s take a look how this helps us: 
 
 ```swift
 [1,3,4,5,6,7].concat(using: 0) // 26
@@ -89,7 +89,7 @@ What we have got here, is simplification of computations: since `Semigroup` alre
 The next part will introduce new functional data structure that even greatly simplifies computations!
 
 ## Monoid
-`Monoid` is very similar to `Semigroup`. It introduces one additional concept which is the `identity`. Speaking from the technical perspective `identity` is the initial state of the `Monoid`. 
+`Monoid` is very similar to `Semigroup`. It introduces one additional concept which is the `identity` principle. Speaking from the technical perspective `identity` is the initial state of the `Monoid`. 
 
 ```swift
 protocol Monoid: Semigroup {
@@ -115,7 +115,7 @@ extension Array: Monoid {
 }
 ```
 
-We introduced new protocol called `Monoid` that has a single read-only property called `identity` of type `Self`. The next is we added conformance of the protocol for the supported types such as `Int`, `String`, `Bool` and `Array`.  
+We introduced new protocol called `Monoid` that has a single read-only property called `identity` of type `Self`. Next, we added conformance of the protocol for the supported types such as `Int`, `String`, `Bool` and `Array`.  
 
 The only thing that is left is to implement `concat` method for `Array` protocol where array element type is `Monoid`:
 
@@ -132,11 +132,11 @@ extension Array where Array.Element: Monoid {
 ["Hello", " ", "new ", "world", "!"].concat() // Hello new world!
 ```
 
-The does pretty much the same except one addition: we no longer need to use the initial value since each type that supports `Monoid` has the `identity` property. 
+The code does pretty much the same except one addition: we no longer need to use the initial value since each type that supports `Monoid` has the `identity` property. 
 
 
 ## Morphism 
-In functional programming `Morphism` is simply a transformation function. There are two types of morphisms: `Endomorphism` and `Isomorphism`. `Endomorphism` is represented as a function where the input type is the same as the output. `Isomorphism` is also represented as a pair of functions (of course, it is Functional Paradigm - everything is a function 😄) that transforms between two types of objects that is structural in nature and no data is lost:
+In functional programming `Morphism` is simply a transformation function. There are two types of morphisms: `Endomorphism` and `Isomorphism`. `Endomorphism` is represented as a function where the input type is the same as the output. `Isomorphism` is also represented as a pair of functions (of course, it is Functional Paradigm - everything is a function 😄) which transforms between two types of objects that is structural in nature and no data is lost:
 
 ```swift
 struct Endomorphism<E> {
@@ -162,7 +162,7 @@ extension Endomorphism: Semigroup, Monoid {
 }
 ```
 
-`Endomorphism` is represented as `struct` with a single immutable property called `handle`. `Handle` is a closure that accepts a generic parameter `E` and returns it. Then we add conformances for `Monoid` protocol. Since `Monoid` is a subtype of `Semigroup` we have to define `diamond` operator as a static function and define the `identity` property in order to define the initial state of `Endomorphism`.  The diamond operator is simply creates new `Endomorphism` by taking the right hand side `Endomorphism`, calling the `handle` closure with the input parameter of the value that was returned by the left hand side `Endomorphism` function execution. 🤯 I know, it seems like one of those [Christopher Nolan movies](https://www.imdb.com/title/tt1375666/) 😄.
+`Endomorphism` is represented as a `struct` with a single immutable property called `handle`. `Handle` is a closure that accepts a generic parameter `E` and returns it. Then we add conformances for `Monoid` protocol. Since `Monoid` is a subtype of `Semigroup` we have to define `diamond` operator as a static function and define the `identity` property in order to define the initial state of `Endomorphism`.  The diamond operator is simply creates new `Endomorphism` by taking the right hand side `Endomorphism`, calling the `handle` closure with the input parameter of the value that was returned by the left hand-side `Endomorphism` function execution. 🤯 I know, it seems like one of those [Christopher Nolan movies](https://www.imdb.com/title/tt1375666/) 😄.
 
 By using this new endomorphic type we can actually do pretty neat things, like the following:
 
@@ -183,7 +183,8 @@ let increment = Endomorphism<Int> { $0 + 1 }
 ```
 
 Let’s break it down line by line. We started from defining new properties of type `Endomorphism` of type `Int`.  I hope that each of the structs are pretty self-explanatory. Basically we wrapped logic into functions that are composable and can be handled separately. We then created an array of operations, called the `concat` function (which was defined as an extension for `Array` type) and called `handle` closure with the initial parameter. 
-Practical example explained how the `diamond` operator works: sometimes it’s better to understand how the system works from the outside, instead of trying to decompose every element and try to understand from the bottom up. By changing the order and type of the chained functions we can understand the concept behind the operator for `Endomorphism` - it simply takes the argument from `handle` function and passes it to the first endomorphic function and so on for each of the functions, until there is no function to execute. 
+
+Practical example demonstrated how the `diamond` operator works: sometimes it’s better to understand how the system works from the outside, instead of trying to decompose every element and try to understand from the bottom up. By changing the order and type of the chained functions we can understand the concept behind the operator for `Endomorphism` - it simply takes the argument from `handle` function and passes it to the first endomorphic function and so on for each of the functions, until there is no function to execute. 
 
 Let’s take a look at the last example, where we use `String` type to create composable, endomorphic transformations:
 

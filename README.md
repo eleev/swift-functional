@@ -3,9 +3,11 @@
 [![Language](https://img.shields.io/badge/language-Swift-orange.svg)]()
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)]()
 
-**Last Update: 25/September/2018.**
+**Last Update: 20/December/2018.**
 
 ![](logo-swift_functional.png)
+
+### If you like the project, please give it a star ⭐ It will show the creator your appreciation and help others to discover the repo.
 
 # ✍️ About
 🧠 Articles and notes about functional programming in Swift.
